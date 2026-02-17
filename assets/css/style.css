@@ -357,7 +357,13 @@ footer {
 .submit-wrapper {
     margin-top: 40px;
 }
-
+.form-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #444;
+}
 .submit-btn {
     background: #244a8f;
     color: #fff;
