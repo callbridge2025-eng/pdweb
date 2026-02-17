@@ -531,4 +531,7 @@ footer {
   display: inline-block;
   width: 110px;
 }
+input[type="date"] {
+    color: #333;
+}
 
