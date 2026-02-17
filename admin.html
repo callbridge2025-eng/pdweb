@@ -74,16 +74,16 @@ function renderTable(data){
     return;
   }
 
-  // Skip header row (row 0)
-  for(let i = 1; i < data.length; i++){
+  // Remove header row
+  const submissions = data.slice(1).reverse(); // NEWEST FIRST
 
-    const row = data[i];
+  submissions.forEach((row, index) => {
 
     const card = document.createElement("div");
     card.className = "application-card";
 
     card.innerHTML = `
-      <h3>Application #${i}</h3>
+      <h3>Application #${index + 1} (Newest)</h3>
       <div class="field"><strong>Name:</strong> ${row[0] || ""}</div>
       <div class="field"><strong>Phone:</strong> ${row[1] || ""}</div>
       <div class="field"><strong>Email:</strong> ${row[2] || ""}</div>
@@ -99,7 +99,7 @@ function renderTable(data){
     `;
 
     container.appendChild(card);
-  }
+  });
 }
 
 </script>
